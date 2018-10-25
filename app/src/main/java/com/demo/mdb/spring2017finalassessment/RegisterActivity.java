@@ -58,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         findViewById(R.id.createnewuser).setOnClickListener(this);
+        findViewById(R.id.imageView).setOnClickListener(this);
         image = (ImageView) findViewById(R.id.imageView);
         nameText = (TextView) findViewById(R.id.name);
         emailText = (TextView) findViewById(R.id.email2);

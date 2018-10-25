@@ -48,6 +48,21 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.CustomView
         sendIntent.putExtra(Intent.EXTRA_TEXT, ***PUT A STRING HERE THAT SAYS YOUR ACCURACY AND WPM SO IT CAN BE SHARED WITH FRIENDS);
         sendIntent.setType("text/plain");
          */
+        final Game game = games.get(position);
+        holder.typedTextView.setText(game.typedString);
+        holder.accuracyTextView.setText(game.accuracyPercentage);
+        holder.wpmTextView.setText(game.wpm);
+
+        holder.shareImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                String flexInfo = "Accuracy: " + Integer.toString(game.accuracyPercentage) + ", WPM: " + Integer.toString(game.wpm);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, flexInfo);
+                sendIntent.setType("text/plain");
+            }
+        });
     }
 
     @Override

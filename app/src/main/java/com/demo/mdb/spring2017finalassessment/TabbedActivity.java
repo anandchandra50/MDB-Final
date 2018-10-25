@@ -151,16 +151,16 @@ public class TabbedActivity extends AppCompatActivity {
          * USER. Points will be deducted if you load everything.
          */
         private static final String ARG_SECTION_NUMBER = "scores_section";
-
+        private ArrayList<String> gameIDs = new ArrayList<>();
+        private ArrayList<Game> games = new ArrayList<>();
+        private ScoresAdapter adapter;
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-            ArrayList<Game> games = new ArrayList<>();
             final View rootView = inflater.inflate(R.layout.fragment_scores, container, false);
             RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.scoresRecyclerView);
-            ScoresAdapter adapter = new ScoresAdapter(getContext(), games);
+            adapter = new ScoresAdapter(getContext(), games);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
 
@@ -170,12 +170,30 @@ public class TabbedActivity extends AppCompatActivity {
             userGames.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    
-                }
+                    gameIDs.clear();
+                    games.clear();
 
+                    DatabaseReference gamesRef = FirebaseDatabase.getInstance().getReference("games");
+
+                    // for each game id
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        String gameID = postSnapshot.getValue().toString();
+                        // fetch game data and add to games
+                        // each one of these references stores the data for one game
+                        gamesRef.child(gameID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                games.add(dataSnapshot.getValue(Game.class));
+                                adapter.notifyDataSetChanged();
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                }
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 }
             });
 
