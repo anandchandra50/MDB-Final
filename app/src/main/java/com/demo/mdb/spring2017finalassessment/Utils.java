@@ -49,7 +49,7 @@ public class Utils {
 
         @Override
         public String call() throws Exception {
-            // RUN ASYNC TASK HERE
+            // run async task here
             String urlString = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
 
             try {
@@ -75,38 +75,6 @@ public class Utils {
         }
 
     }
-
-    public static class FetchJSON extends AsyncTask<Void, Void, JSONObject> {
-        private String urlString = "https://api.whatdoestrumpthink.com/api/v1/quotes/random";
-        @Override
-        protected JSONObject doInBackground(Void... voids) {
-            try {
-                URL url = new URL(urlString);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                try {
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    String stream = convertStreamToString(in);
-                    return new JSONObject(stream);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } finally {
-                    urlConnection.disconnect();
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        private void readStream(InputStream stream) {
-            System.out.println(stream);
-        }
-
-    }
-
 
     static String convertStreamToString(java.io.InputStream is) {
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");

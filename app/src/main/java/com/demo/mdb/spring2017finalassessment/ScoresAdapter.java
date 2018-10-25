@@ -58,7 +58,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.CustomView
             public void onClick(View view) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                String flexInfo = "Accuracy: " + Integer.toString(game.accuracyPercentage) + ", WPM: " + Integer.toString(game.wpm);
+                String flexInfo = "Look at my score! Accuracy: " + Integer.toString(game.accuracyPercentage) + ", WPM: " + Integer.toString(game.wpm);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, flexInfo);
                 sendIntent.setType("text/plain");
                 context.startActivity(sendIntent);

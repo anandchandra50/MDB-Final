@@ -68,7 +68,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         final ProgressDialog nDialog;
         nDialog = new ProgressDialog(this);
-        nDialog.setTitle("Creating Account");
+        nDialog.setTitle("Creating Game");
         nDialog.setIndeterminate(true);
         nDialog.setCancelable(false);
         nDialog.show();
@@ -79,17 +79,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     Future<String> futurePhrase = Utils.getRandomPhrase();
                     phrase = futurePhrase.get();
-                    phraseTextView.setText(phrase);
-                    splitPhrase = phrase.split("\\s");
+                    return null;
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return null;
                 }
-                return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
+                splitPhrase = phrase.split("\\s");
+                phraseTextView.setText(phrase);
                 nDialog.hide();
             }
         }.execute();

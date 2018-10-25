@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // check to make sure email and pass are valid first
         final ProgressDialog nDialog;
         nDialog = new ProgressDialog(this);
-        nDialog.setTitle("Creating Account");
+        nDialog.setTitle("Logging In");
         nDialog.setIndeterminate(true);
         nDialog.setCancelable(false);
         nDialog.show();
