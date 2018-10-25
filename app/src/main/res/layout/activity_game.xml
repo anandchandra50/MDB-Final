@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.demo.mdb.spring2017finalassessment.GameActivity">
+
+    <TextView
+        android:text="The quick brown fox jumped over the lazy dog. The quick brown fox jumped over the lazy dog."
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/phraseTextView"
+        android:textSize="20sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textCapSentences"
+        android:ems="10"
+        android:id="@+id/typedEditText"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        android:hint="Type to start"
+        app:layout_constraintRight_toLeftOf="@+id/doneImageView"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/phraseTextView" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer"
+        android:textSize="20sp"
+        app:layout_constraintRight_toRightOf="@+id/phraseTextView"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/phraseTextView" />
+
+    <TextView
+        android:text="---%"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wpmTextView"
+        android:textSize="20sp"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/phraseTextView"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/phraseTextView" />
+
+    <ImageView
+        android:id="@+id/doneImageView"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/typedEditText"
+        app:layout_constraintRight_toRightOf="@+id/phraseTextView"
+        app:layout_constraintTop_toTopOf="@+id/typedEditText"
+        app:srcCompat="@drawable/ic_send_black_24dp"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintTop_creator="1" />
+</android.support.constraint.ConstraintLayout>
