@@ -1,5 +1,6 @@
 package com.demo.mdb.spring2017finalassessment;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.SystemClock;
@@ -60,6 +61,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
          * call getRandomPhrase in a new thread. Use the result of this to set the phrase variable,
          * set the phraseTextView to that phrase, and set splitPhrase to phrase.split("\\s")
          */
+
+        // right now there's a slight issue with this
+        // it takes time to fetch phrase, and we may try to access it before it's fetched
+        // so I'm using a progress bar to try to solve that
+
+        final ProgressDialog nDialog;
+        nDialog = new ProgressDialog(this);
+        nDialog.setTitle("Creating Account");
+        nDialog.setIndeterminate(true);
+        nDialog.setCancelable(false);
+        nDialog.show();
+
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
@@ -74,6 +87,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 return null;
             }
 
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                nDialog.hide();
+            }
         }.execute();
 
         typedEditText.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);

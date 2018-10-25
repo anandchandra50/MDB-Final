@@ -1,5 +1,6 @@
 package com.demo.mdb.spring2017finalassessment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signIn(String email, String pass) {
         // check to make sure email and pass are valid first
+        final ProgressDialog nDialog;
+        nDialog = new ProgressDialog(this);
+        nDialog.setTitle("Creating Account");
+        nDialog.setIndeterminate(true);
+        nDialog.setCancelable(false);
+        nDialog.show();
+
         mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -69,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     // display toast error
                     Toast.makeText(getApplicationContext(), "Incorrect Username or Password", Toast.LENGTH_SHORT);
                 }
+                nDialog.hide();
             }
         });
     }

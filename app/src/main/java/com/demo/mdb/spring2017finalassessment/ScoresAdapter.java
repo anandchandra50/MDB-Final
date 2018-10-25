@@ -50,8 +50,8 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.CustomView
          */
         final Game game = games.get(position);
         holder.typedTextView.setText(game.typedString);
-        holder.accuracyTextView.setText(game.accuracyPercentage);
-        holder.wpmTextView.setText(game.wpm);
+        holder.accuracyTextView.setText(Integer.toString(game.accuracyPercentage));
+        holder.wpmTextView.setText(Integer.toString(game.wpm));
 
         holder.shareImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,7 @@ public class ScoresAdapter extends RecyclerView.Adapter<ScoresAdapter.CustomView
                 String flexInfo = "Accuracy: " + Integer.toString(game.accuracyPercentage) + ", WPM: " + Integer.toString(game.wpm);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, flexInfo);
                 sendIntent.setType("text/plain");
+                context.startActivity(sendIntent);
             }
         });
     }
